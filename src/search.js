@@ -56,7 +56,7 @@ function miniMaxRoot(board,depth)
 function miniMax(board,depth) {
 	// if (checkTime()) return null;
 	if (board.ended()) return board.value;
-	console.log(depth);
+	// console.log(depth);
 	if (depth === 0) {
 		cut = true;
 		return board.value;

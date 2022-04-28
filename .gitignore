@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+/lib/
+/lib/p5.dom.js
+/lib/p5.js

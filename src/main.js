@@ -5,7 +5,7 @@ var hoverCard, hoverCell, selectedCard, selectedOriginCell;
 var searchTimeSlider, aiBlueCheckbox, aiRedCheckbox, showHintsCheckbox, debug, cardSelects, rendered;
 
 function setup() {
-	createCanvas(850,800).parent("container");	
+	createCanvas(1000,1000).parent("container");
 		
 	hoverCard = null;
 	hoverCell = null;
@@ -31,28 +31,26 @@ function setup() {
 	createDiv("Use Arrow Keys to browse history").position(25,575).parent("container");
 	var buttons = createDiv("").position(25,600).parent("container");
 	buttons.child(createButton('AI (M)ove').mousePressed(aiMove).parent("container"));
-	buttons.child(createButton('(R)estart with random cards').mousePressed(restart).parent("container"));
+	// buttons.child(createButton('(R)estart with random cards').mousePressed(restart).parent("container"));
 	buttons.child(createButton('Restart with selected cards').mousePressed(restartSelected).parent("container"));
-	
 
+
+	cardSelect()
+
+	// cardSelects[0].changed(selectEvent);
+	// cardSelects[1].changed(selectEvent);
+	// cardSelects[2].changed(selectEvent);
+	// cardSelects[3].changed(selectEvent);
+	// cardSelects[4].changed(selectEvent);
+
+}
+
+function cardSelect()
+{
 	cardSelects = [];
 	for(var i = 0; i < 5; i++)
 	{
 		cardSelects.push(createCardSelect().position(100,645 + i*25).selected(i));
-	}
-
-	cardSelects[0].changed(selectEvent);
-	cardSelects[1].changed(selectEvent);
-	cardSelects[2].changed(selectEvent);
-	cardSelects[3].changed(selectEvent);
-	cardSelects[4].changed(selectEvent);
-
-}
-
-function selectEvent(){
-	let item = cardSelects[0].value();
-	if (item>4){
-		var abcd = 1
 	}
 }
 
@@ -63,10 +61,9 @@ function createCardSelect() {
 	return select;	
 }
 
-// function getSearchTime() { return logSlider(searchTimeSlider.value(), 10, 5*60*1000)}
-// function getSearchTime() { return logSlider(searchTimeSlider.value(), 1, 3)}
 
 function restart() {
+	// cardSelect()
 	boardStack = [];
 	moveStack = [];
 	debugStack = [];
@@ -83,7 +80,9 @@ function restart() {
 
 function restartSelected() {
 	restart();
+
 	var board = currentBoard(), i = 0;
+
 	board.cards_R[0] = CARDS[cardSelects[i++].selected()];
 	board.cards_R[1] = CARDS[cardSelects[i++].selected()];
 	board.board_card = CARDS[cardSelects[i++].selected()];
@@ -240,11 +239,22 @@ function draw() {
 	stroke(0); fill(0);
 	text("Board card",0,s+25*(i++));
 	stroke(0,0,255); fill(0,0,255);
+	// text(mouseX, 400, 500)
+	// text(mouseY, 400, 550)
 	text("Blue card 1",0,s+25*(i++));
 	text("Blue card 2",0,s+25*(i++));
-	
+
+	//Custom Boar
+	textAlign(LEFT,TOP);
+	stroke(0); strokeWeight(1);
+	stroke(0,0,0); fill(0,0,0);
+	text("Custom Board",700,470);
+	translate(700,500)
+	drawBoard()
+
 	// Ai moves
 	if (!game_ended && rendered && ((board.active && aiRedCheckbox.checked()) || (!board.active && aiBlueCheckbox.checked()))) aiMove();	
 	
 	rendered = true;
 }
+
