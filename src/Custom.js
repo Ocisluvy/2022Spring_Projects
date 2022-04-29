@@ -28,7 +28,6 @@ function drawBoard() {
 function mousePressed() {
     if ((mouseX >= 725) && (mouseX <= 975) && (mouseY >= 500) && (mouseY <= 750)) {
         var test = list.indexOf([Math.floor((mouseX - 725) / 50), Math.floor((mouseY - 500) / 50)])
-        console.log(test)
         if (test === -1) {
             list.push([Math.floor((mouseX - 725) / 50), Math.floor((mouseY - 500) / 50)])
         }

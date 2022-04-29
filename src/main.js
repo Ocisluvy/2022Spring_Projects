@@ -21,7 +21,7 @@ function setup() {
 	searchTimeSlider.style('width', '200px');
 	
 	aiRedCheckbox = createCheckbox('use AI for red player', false).parent("container");
-	aiBlueCheckbox = createCheckbox('use AI for blue player', false).parent("container");
+	aiBlueCheckbox = createCheckbox('use random choice for blue player', false).parent("container");
 	aiRedCheckbox.position(25, 485);
 	aiBlueCheckbox.position(25, 510);
 	
@@ -36,12 +36,6 @@ function setup() {
 
 
 	cardSelect()
-
-	// cardSelects[0].changed(selectEvent);
-	// cardSelects[1].changed(selectEvent);
-	// cardSelects[2].changed(selectEvent);
-	// cardSelects[3].changed(selectEvent);
-	// cardSelects[4].changed(selectEvent);
 
 }
 
@@ -83,11 +77,14 @@ function restartSelected() {
 
 	var board = currentBoard(), i = 0;
 
-	board.cards_R[0] = CARDS[cardSelects[i++].selected()];
-	board.cards_R[1] = CARDS[cardSelects[i++].selected()];
-	board.board_card = CARDS[cardSelects[i++].selected()];
-	board.cards_B[0] = CARDS[cardSelects[i++].selected()];
-	board.cards_B[1] = CARDS[cardSelects[i++].selected()];
+
+	var cardList = setCard();
+
+	board.cards_R[0] = cardList[cardSelects[i++].selected()];
+	board.cards_R[1] = cardList[cardSelects[i++].selected()];
+	board.board_card = cardList[cardSelects[i++].selected()];
+	board.cards_B[0] = cardList[cardSelects[i++].selected()];
+	board.cards_B[1] = cardList[cardSelects[i++].selected()];
 	
 	board.validmoves = null;	
 	board.op_validmoves = null;
@@ -155,7 +152,10 @@ function mouseClicked() {
 function currentBoard() { return boardStack[boardStack.length-1-undoIndex]}
 
 function makeMove(move) {
-	if (currentBoard().ended() || !move) return;
+	if (currentBoard().ended() || !move)
+	{
+		return;
+	}
 	
 	for(;undoIndex > 0;undoIndex--) {
 		boardStack.pop();

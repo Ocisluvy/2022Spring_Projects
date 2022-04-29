@@ -52,7 +52,12 @@ var drawCard = function(card) {
 	pop();
 }
 
-function setCustomer1(list)
-{
-	Customer1 = list
+function setCustomer1(list) {
+	Customer1 = list;
+}
+
+function setCard(){
+	return [Tiger,Dragon,Frog,Rabbit,Crab,Customer1
+		// ,Customer2,Customer3,Customer4,Customer5
+	];
 }
