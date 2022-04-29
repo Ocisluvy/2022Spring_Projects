@@ -1,31 +1,46 @@
-# 2022 Spring Projects
+# Project Introduction
+Final project & Selfish motive to start learning JavaScript :satisfied:
 
-Each project from this semester is a public fork linked from this repository.  This is just one of the many assignments students worked on for the course, but this is the *only* one they are permitted to publish openly.
+The onitama game is from [Arcane Wonders](https://www.arcanewonders.com/product/onitama/).
 
-## Final Project Expectations:
+This project is adapted from [Luis' work](https://github.com/LuisEduardoReis/Onitama). 	:sunglasses:Standing on the shoulders of giants.
 
-You have considerable flexibility about specifics and you will publish your project openly (as a fork from here) to allow making it part of your portfolio if you choose.  You may work alone or in a team of two students. 
+Use the library from [p5.js](https://p5js.org/)
+- Add some new features
+  - Add difficulty selection
+  - Random choice by Computer
+- Rewrite the A.I. algorithm totally
+- Improve the evaluation system
+  - Add the distance calculation between master pawn and student pawn
+  - Add the distance calculation between pawns and original position of opponent's master 
+pawn
+- Change some game rules
+  - Customize the card by user interface (Allow one for now, hard to build UI :thinking:)
+  - Win condition: move both kinds of pawn on to the original position of opponent's master pawn
+  - Abandoned plans
+    - Change the initial position of the pawns (the game board is too small, little changes 
+will make the game end faster and the A.I. can't get enough data)
+    - Add gameplay "way of the wind" from extension pack (don't know the specific rules)
 
-Regardless of topic, it must involve notable amounts of original work of your own, though it can of course use existing libraries or be inspired by or adapted from some other published work(s). 
+### UI
+![img.png](img/img.png)
+## Project Analysis:
+A.I. algorithm uses Minimax and the depth can be 2, 4 or 6 based on the different difficulty level.
 
-PLAGIARISM IS NOT ACCEPTABLE. From the first commit through all production of documentation and code, it must be crystal clear which, if any, parts of the project were based on or duplicated from any other source(s) all of which must be cited.  This should be so specific that any evaluator can tell which lines of code are original work and which aren't.  Same for all written narrative, documentation, images, significant algorithms, etc.
+Time Complexity for each step O(b^d)
 
-## Project Types you may choose:
+b: the options for each step(from 1 to 24)
+d: search depth (2, 4 or 6)
 
-(Making original _variations_ of puzzles and games isn't as difficult as it may seem -- we'll discuss this in class. _Though admittedly, making *good* game variations -- that are well-balanced, strategically interesting, with good replay value_ can take expertise or luck and play-testing with revisions.  Such balanced elegance is desirable but might not be achievable here, given the short time you have.)
+When depth is 4 (With in 0.2ms)
 
-1. Devise your own new _original_ type of logic puzzle or an _original variation_ of existing puzzle type. Like with previous homework, your program should be able to randomly generate many puzzles of your type and to verify that all puzzles generated comply with the standard meta-rule that only one valid solution exists. It needs to output the unsolved puzzles in a way that a human can print or view them conveniently to try solving them and to somehow output (to file?) or display the solution for each puzzle when requested, so as not to spoil the challenge. An interactive UI to "play" the puzzles interactively is *not* required.
+![depth==4.png](img/depth==4.png)
 
-2. OR develop an AI game player for an _original variation_ of some existing strategy game.  If you do this, it needs to be set up so it can either play computer-vs-computer and/or against human players with a reasonable text or graphical UI. 2B. If two teams want to independently develop AI players for the same type of game variant as each other (but using different algorithms, strategies, and/or data structures) so they can compete, that is okay.  A sub-variation is to enable this game type on our course game server, discuss with the instructor if this is of interest.
+When depth is 6 (With in 0.5ms)
 
-3. OR Computationally 'Solve' a game.  _Background: Some strategic games, especially those of perfect information are known to be "solved". See https://en.wikipedia.org/wiki/Solved_game, which we discussed in class._  Sometimes these proofs are done through mathematical analysis, other times through exhaustive computational verification. If you choose this option, you can either write your own code or modify some existing code that plays a game, to exhaustively analyze a game to attempt to prove if it is "solved" in this way for certain configurations. Changes to rules or conditions of a known solved game can alter this outcome and require reanalysis.
+![depth==6.png](img/depth==6.png)
 
-
-## Deliverables and other Requirements:
-
-* Have some fun!
-* In your own fork, please replace this README.md file's contents with a good introduction to your own project. 
-* Targeted Algorithm Analysis:  Regardless of which option you choose, you need to _describe the performance characteristics of some critical parts of your program and explain why you chose the data structures and core algorithm(s) you did_. So for example, if you chose Type #1, what's the Big-O, Big-Theta, or Big-Omega run-time complexity of your puzzle solver? Or the puzzle generator? If you're doing Type #2 and using minimax or similar, what's the complexity of your heuristic evaluation function?  
-* Performance Measurement: Supplement the analysis above with run-time measurements of multiple iterations of the game or puzzles as discussed in class.
-* If your team has more than one student, see that everyone makes substantial git commits. In addition, your README documentation should include a summary of how you shared the work.
-* Live in-class presentation & demonstration of your work.
+Evaluation function
+- The number difference between pawns from two sides (Time Complexity: O(1))
+- The distance calculation between master pawn and student pawn (Time Complexity: O(n))
+- The distance calculation between pawns and original position of opponent's master (Time Complexity: O(n))
