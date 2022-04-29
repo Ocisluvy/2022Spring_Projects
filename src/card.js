@@ -57,6 +57,7 @@ function setCustomer1(list) {
 }
 
 function setCard(){
+	CARD_NAMES[JSON.stringify(Customer1)] = "Customer1";
 	return [Tiger,Dragon,Frog,Rabbit,Crab,Customer1
 		// ,Customer2,Customer3,Customer4,Customer5
 	];

@@ -2,20 +2,12 @@ var INF = 100000;
 var search_time = 1000;
 var search_start = 0;
 var search_accum = 0;
-var search_count = 0;
 var timedout = false;
 var cut = false;
 
-function checkTime() {
-    if (search_accum++ > 10000) {
-        if (new Date().getTime() - search_start > search_time) timedout = true;
-        search_accum = 0;
-    }
-    return timedout;
-}
-
 function miniMaxRoot(board, depth) {
     if (board.active) {
+        const t0 = performance.now();
         var arrayBest = []
         var maxDepth = depth * 2
         var new_value = 0;
@@ -47,13 +39,14 @@ function miniMaxRoot(board, depth) {
         // var testNum = Math.floor(Math.random() * arrayBest.length)
         // var test2 = arrayBest[0]
         // var test = (arrayBest.length > 0) ? arrayBest[Math.floor(Math.random() * arrayBest.length)] : bestMove;
+
+        const t1 = performance.now();
+        console.log(`Call to Minimax took ${t1 - t0} milliseconds.`);
         return (arrayBest.length > 0) ? arrayBest[Math.floor(Math.random() * arrayBest.length)] : bestMove;
-        // return test
     } else {
         return randomMove(board);
     }
 }
-
 function randomMove(board) {
     var moves = board.getValidMoves(board.active);
     var randomNum = Math.floor(Math.random() * moves.length)
